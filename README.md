@@ -1,6 +1,6 @@
 # enum
 
-[ [📄 docs](https://pkg.go.dev/github.com/orsinium-labs/enum) ] [ [🐙 github](https://github.com/orsinium-labs/enum) ] [ [❤️ sponsor](https://github.com/sponsors/orsinium) ]
+[ [📄 docs](https://pkg.go.dev/github.com/esome/golang-enum) ] [ [🐙 github](https://github.com/esome/golang-enum) ]
 
 Type safe enums for Go without code generation or reflection.
 
@@ -13,19 +13,26 @@ Type safe enums for Go without code generation or reflection.
 * Flexible, supports both static and runtime definitions.
 * Zero-dependency.
 
-## 📦 Installation
+
+🧬 Origin: 
+
+This project is a fork of [🐙 https://github.com/orsinium-labs/enum](https://github.com/orsinium-labs/enum).  
+So if you like it, consider [❤️ sponsoring](https://github.com/sponsors/orsinium) the original author.
+
+⛓️‍💥️ Breaking changes compared to the original library:
+
+The generic value field of `enum.Member` has been renamed to `Val` from `Value`.
+This enables the implementation of the `database/sql/driver.Valuer` interface on derived types.
+
+Unfortunately, `@orsinium` refused to merge the pull-request, so it is a separate fork now.
+
+## 1.1. 📦 Installation
 
 ```bash
-go get github.com/orsinium-labs/enum/v2
+go get github.com/esome/golang-enum
 ```
 
-## ⛓️‍💥️ Breaking changes compared to v1
-
-- The generic value field of `enum.Member` has been renamed to `Val` from `Value`. 
-  This enables the implementation of the `database/sql/driver.Valuer` interface on derived types.
-
-
-## 🛠️ Usage
+## 1.3. 🛠️ Usage
 
 Define:
 
@@ -81,8 +88,14 @@ func f(color Color) {
 Define custom methods on enum members:
 
 ```go
+// UnmarshalJSON implements the [encoding/json.Unmarshaler] interface
 func (c Color) UnmarshalJSON(b []byte) error {
   return nil
+}
+
+// Value implements the [database/sql/driver.Valuer] interface
+func (c Color) Value() (driver.Value, error) {
+  return nil, nil
 }
 ```
 
@@ -131,9 +144,11 @@ var (
 )
 ```
 
-## 🤔 QnA
+## 1.4. 🤔 QnA
 
-1. **What happens when enums are added in Go itself?** I'll keep it alive until someone uses it but I expect the project popularity to quickly die out when there is native language support for enums. When you can mess with the compiler itself, you can do more. For example, this package can't provide an exhaustiveness check for switch statements using enums (maybe only by implementing a linter) but proper language-level enums would most likely have it.
-1. **Is it reliable?** Yes, pretty much. It has good tests but most importantly it's a small project with just a bit of the actual code that is hard to mess up.
-1. **Is it maintained?** The project is pretty much feature-complete, so there is nothing for me to commit and release daily. However, I accept contributions (see below).
-1. **What if I found a bug?** Fork the project, fix the bug, write some tests, and open a Pull Request. I usually merge and release any contributions within a day.
+1. **What happens when enums are added in Go itself?** I'll keep it alive until someone uses it, but I expect the project popularity to quickly die out when there is native language support for enums. When you can mess with the compiler itself, you can do more. For example, this package can't provide an exhaustiveness check for switch statements using enums (maybe only by implementing a linter) but proper language-level enums would most likely have it.
+2. **Is it reliable?** Yes, pretty much. It has good tests but most importantly it's a small project with just a bit of the actual code that is hard to mess up.
+3. **Is it maintained?** The project will review and merge upstream changes regularly, if they can be adopted easily. However, active development is unlikely to happen, since it is considered feature-complete, very much like the original one.
+4. **What if I found a bug?** 
+   1. Please check, whether the bug exists in the original project as well, and follow their contribution policies. Then the point above applies.
+   2. If it only exists here, fork the project, fix the bug, write some tests, and open a Pull Request. It will be reviewed contemporary.

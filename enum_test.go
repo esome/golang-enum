@@ -5,7 +5,7 @@ import (
 
 	"github.com/matryer/is"
 
-	"github.com/orsinium-labs/enum/v2"
+	"github.com/esome/golang-enum"
 )
 
 type Color enum.Member[string]

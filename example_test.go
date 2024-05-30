@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/orsinium-labs/enum/v2"
+	"github.com/esome/golang-enum"
 )
 
 func ExampleNew() {

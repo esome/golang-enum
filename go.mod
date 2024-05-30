@@ -1,4 +1,4 @@
-module github.com/orsinium-labs/enum/v2
+module github.com/esome/golang-enum
 
 go 1.20
 
