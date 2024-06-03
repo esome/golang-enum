@@ -32,7 +32,7 @@ Unfortunately, `@orsinium` refused to merge the pull-request, so it is a separat
 go get github.com/esome/golang-enum
 ```
 
-## 1.3. 🛠️ Usage
+## 1.2. 🛠️ Usage
 
 Define:
 
@@ -144,7 +144,7 @@ var (
 )
 ```
 
-## 1.4. 🤔 QnA
+## 1.3. 🤔 QnA
 
 1. **What happens when enums are added in Go itself?** I'll keep it alive until someone uses it, but I expect the project popularity to quickly die out when there is native language support for enums. When you can mess with the compiler itself, you can do more. For example, this package can't provide an exhaustiveness check for switch statements using enums (maybe only by implementing a linter) but proper language-level enums would most likely have it.
 2. **Is it reliable?** Yes, pretty much. It has good tests but most importantly it's a small project with just a bit of the actual code that is hard to mess up.
