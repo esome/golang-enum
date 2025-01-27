@@ -14,6 +14,8 @@ var (
 	Red    = Color{"red"}
 	Green  = Color{"green"}
 	Blue   = Color{"blue"}
+	Purple = Color{"purple"}
+	Yellow = Color{"yellow"}
 	Colors = enum.New(Red, Green, Blue)
 )
 
@@ -111,7 +113,32 @@ func TestEnum_Index_Panic(t *testing.T) {
 		r := recover()
 		is.Equal(r, "the given Member does not belong to this Enum")
 	}()
-	Colors.Index(Color{"purple"})
+	Colors.Index(Purple)
+}
+
+func TestEnum_Diff(t *testing.T) {
+	is := is.New(t)
+	others := enum.New(Purple, Green, Blue, Yellow)
+	diff := Colors.Diff(others)
+	// left side
+	is.Equal(diff, enum.New(Red))
+	// right side
+	diff = others.Diff(Colors)
+	is.Equal(diff, enum.New(Purple, Yellow))
+}
+
+func TestEnum_Intersect(t *testing.T) {
+	is := is.New(t)
+	others := enum.New(Purple, Green, Blue, Yellow)
+	intersect := Colors.Intersect(others)
+	is.Equal(intersect, enum.New(Green, Blue))
+}
+
+func TestEnum_Join(t *testing.T) {
+	is := is.New(t)
+	others := enum.New(Purple, Green, Blue, Yellow)
+	joined := Colors.Join(others)
+	is.Equal(joined, enum.New(Red, Green, Blue, Purple, Yellow))
 }
 
 func TestBuilder(t *testing.T) {

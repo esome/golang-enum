@@ -156,6 +156,42 @@ func (e Enum[M, V]) GoString() string {
 	return fmt.Sprintf("enum.New(%s)", joined)
 }
 
+// Diff computes the difference between the actual and the given enum.
+// It returns a new enum with members that are in the actual enum but not in the given one.
+func (e Enum[M, V]) Diff(other Enum[M, V]) Enum[M, V] {
+	items := make([]M, 0, len(e.members))
+	for i := range e.members {
+		if _, ok := other.v2m[e.Value(e.members[i])]; !ok {
+			items = append(items, e.members[i])
+		}
+	}
+	return New(items...)
+}
+
+// Intersect computes the intersection of the actual and the given enum.
+// It returns a new enum with members that are in both enums.
+func (e Enum[M, V]) Intersect(other Enum[M, V]) Enum[M, V] {
+	items := make([]M, 0, len(e.members))
+	for i := range e.members {
+		if _, ok := other.v2m[e.Value(e.members[i])]; ok {
+			items = append(items, e.members[i])
+		}
+	}
+	return New(items...)
+}
+
+// Join combines the actual and the given enum into a new one containing all elements from both.
+func (e Enum[M, V]) Join(other Enum[M, V]) Enum[M, V] {
+	items := make([]M, len(e.members), len(e.members)+len(other.members))
+	copy(items, e.members)
+	for i := range other.members {
+		if _, ok := e.v2m[other.Value(other.members[i])]; !ok {
+			items = append(items, other.members[i])
+		}
+	}
+	return New(items...)
+}
+
 // Parse is like [Enum.Parse] but finds the member for the value using [Equaler] comparator.
 func Parse[M iMember[V], V Equaler[V]](e Enum[M, V], value V) *M {
 	for v, m := range e.v2m {

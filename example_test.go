@@ -184,6 +184,66 @@ func ExampleEnum_TypeName() {
 	// Output: string
 }
 
+func ExampleEnum_Diff() {
+	type Color enum.Member[string]
+
+	var (
+		Red    = Color{"red"}
+		Green  = Color{"green"}
+		Blue   = Color{"blue"}
+		Purple = Color{"purple"}
+		Yellow = Color{"yellow"}
+		Colors = enum.New(Red, Green, Blue)
+	)
+
+	others := enum.New(Purple, Green, Blue, Yellow)
+	// left side
+	diffLeft := Colors.Diff(others)
+	fmt.Println(diffLeft)
+	// right side
+	diffRight := others.Diff(Colors)
+	fmt.Println(diffRight)
+	// Output:
+	// red
+	// purple, yellow
+}
+
+func ExampleEnum_Intersect() {
+	type Color enum.Member[string]
+
+	var (
+		Red    = Color{"red"}
+		Green  = Color{"green"}
+		Blue   = Color{"blue"}
+		Purple = Color{"purple"}
+		Yellow = Color{"yellow"}
+		Colors = enum.New(Red, Green, Blue)
+	)
+
+	others := enum.New(Purple, Green, Blue, Yellow)
+	intersect := Colors.Intersect(others)
+	fmt.Println(intersect)
+	// Output: green, blue
+}
+
+func ExampleEnum_Join() {
+	type Color enum.Member[string]
+
+	var (
+		Red    = Color{"red"}
+		Green  = Color{"green"}
+		Blue   = Color{"blue"}
+		Purple = Color{"purple"}
+		Yellow = Color{"yellow"}
+		Colors = enum.New(Red, Green, Blue)
+	)
+
+	others := enum.New(Purple, Green, Blue, Yellow)
+	joined := Colors.Join(others)
+	fmt.Println(joined)
+	// Output: red, green, blue, purple, yellow
+}
+
 func ExampleNewBuilder() {
 	type Color enum.Member[string]
 	var (
