@@ -1,6 +1,10 @@
 # enum
 
-[ [📄 docs](https://pkg.go.dev/github.com/esome/golang-enum) ] [ [🐙 github](https://github.com/esome/golang-enum) ]
+[![license](https://img.shields.io/github/license/esome/golang-enum?style=flat&label=License&labelColor=rgb(45%2C%2049%2C%2054)&color=rgb(113%2C%2016%2C%20126))](LICENSE.md)
+[![release](https://img.shields.io/github/v/release/esome/golang-enum?include_prereleases&sort=date&display_name=release&style=flat&label=Release&labelColor=rgb(45%2C%2049%2C%2054)&logo=GitHub&logoColor=rgb(136%2C%20142%2C%20147))](https://github.com/esome/golang-enum/releases)
+[![badge](https://github.com/esome/golang-enum/workflows/CodeQL/badge.svg)](https://github.com/esome/golang-enum/actions/workflows/github-code-scanning/codeql)
+[![badge](https://github.com/esome/golang-enum/workflows/Go/badge.svg)](https://github.com/esome/golang-enum/actions/workflows/go.yml)
+![badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/sGy1980de/b272dbf4526c9be75f7da96352873a71/raw/golang-enum-coverage.json)
 
 Type safe enums for Go without code generation or reflection.
 
